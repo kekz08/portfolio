@@ -2,48 +2,40 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
-use App\Enums\ProjectStatus;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Project\ProjectStatusUpdateRequest;
-use App\Http\Resources\ProjectResource;
-use App\Models\Project;
-use App\Repositories\Contracts\ProjectRepositoryInterface;
-use App\Services\ProjectStatusService;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use App\Http\Requests\Api\Project\UpdateProjectStatusRequest;
+use App\Http\Resources\Api\ProjectResource;
+use App\Services\Api\AdminProjectListingService;
+use App\Services\Api\ProjectStatusUpdateService;
+use Illuminate\Http\JsonResponse;
 
 class ProjectManagementController extends Controller
 {
     public function __construct(
-        private readonly ProjectRepositoryInterface $projects,
-        private readonly ProjectStatusService $statusService,
+        private readonly AdminProjectListingService $listing,
+        private readonly ProjectStatusUpdateService $statusUpdater,
     ) {
     }
 
-    public function index(): AnonymousResourceCollection
+    public function index(): JsonResponse
     {
-        $this->authorize('manage-projects');
+        $projects = $this->listing->handle();
 
-        $projects = $this->projects->paginateForAdmin();
-
-        return ProjectResource::collection($projects);
+        return response()->json([
+            'success' => true,
+            'message' => 'Projects fetched successfully.',
+            'data' => ProjectResource::collection($projects)->response()->getData(true)['data'] ?? [],
+        ]);
     }
 
-    public function updateStatus(ProjectStatusUpdateRequest $request, Project $project): ProjectResource
+    public function updateStatus(UpdateProjectStatusRequest $request): JsonResponse
     {
-        $this->authorize('updateStatus', $project);
+        $project = $this->statusUpdater->handle($request->validated(), $request->user());
 
-        $project = $this->statusService->updateStatus(
-            project: $project,
-            status: ProjectStatus::from($request->validated('status')),
-            actor: $request->user(),
-            notes: $request->validated('status_notes'),
-        );
-
-        $project->loadMissing([
-            'user:id,name,email',
-            'activityLogs' => fn ($query) => $query->with('actor:id,name')->latest('created_at'),
+        return response()->json([
+            'success' => true,
+            'message' => 'Project status updated successfully.',
+            'data' => (new ProjectResource($project))->response()->getData(true)['data'] ?? null,
         ]);
-
-        return new ProjectResource($project);
     }
 }

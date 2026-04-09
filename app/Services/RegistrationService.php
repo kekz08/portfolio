@@ -29,13 +29,16 @@ class RegistrationService
                 'phone' => $payload['phone'] ?? null,
                 'company' => $payload['company'] ?? null,
                 'password' => Hash::make((string) $payload['password']),
-                'role' => UserRole::USER,
+                'role' => UserRole::CLIENT,
             ]);
 
             $project = $this->projects->createForUser($user, [
                 'title' => $payload['project_title'],
-                'description' => $payload['project_description'] ?? null,
-                'status' => ProjectStatus::PENDING_REVIEW,
+                'description' => $payload['project_description'],
+                'budget' => $payload['budget'],
+                'deadline' => $payload['deadline'] ?? null,
+                'status' => ProjectStatus::PENDING,
+                'progress_percentage' => 0,
                 'status_notes' => 'Your request is queued for review.',
             ]);
 
@@ -44,9 +47,11 @@ class RegistrationService
                 'user_id' => $user->id,
                 'actor_id' => $user->id,
                 'action' => 'registration_submitted',
-                'new_status' => ProjectStatus::PENDING_REVIEW,
+                'new_status' => ProjectStatus::PENDING,
                 'context' => [
                     'source' => 'hire_me_form',
+                    'budget' => $payload['budget'],
+                    'deadline' => $payload['deadline'] ?? null,
                 ],
             ]);
 
@@ -54,4 +59,3 @@ class RegistrationService
         });
     }
 }
-

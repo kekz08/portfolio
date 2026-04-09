@@ -17,9 +17,13 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('status')->default(ProjectStatus::PENDING_REVIEW->value);
+            $table->string('budget')->nullable();
+            $table->date('deadline')->nullable();
+            $table->string('status')->default(ProjectStatus::PENDING->value);
+            $table->unsignedTinyInteger('progress_percentage')->default(0);
             $table->foreignId('reviewed_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('approved_at')->nullable();
+            $table->timestamp('start_date')->nullable();
             $table->timestamp('started_at')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->text('status_notes')->nullable();
@@ -37,4 +41,3 @@ return new class extends Migration
         Schema::dropIfExists('projects');
     }
 };
-

@@ -29,9 +29,10 @@ class RegisterUserRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:40'],
             'company' => ['nullable', 'string', 'max:255'],
             'project_title' => ['required', 'string', 'max:255'],
-            'project_description' => ['nullable', 'string', 'max:3000'],
+            'project_description' => ['required', 'string', 'max:3000'],
+            'budget' => ['required', 'string', 'max:100'],
+            'deadline' => ['nullable', 'date', 'after_or_equal:today'],
             'password' => ['required', 'confirmed', Password::defaults()],
         ];
     }
 }
-

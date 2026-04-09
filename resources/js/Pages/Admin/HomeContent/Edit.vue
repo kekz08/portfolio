@@ -72,17 +72,17 @@ const resetDefaults = () => {
                 <p class="text-sm font-semibold uppercase tracking-[0.14em] text-black/70">
                     Admin Workspace
                 </p>
-                <h2 class="text-[clamp(2rem,4vw,3.4rem)] font-extrabold leading-none text-black">
+                <h2 class="text-[clamp(1.75rem,3vw,2.85rem)] font-extrabold leading-none text-black">
                     Home Content
                 </h2>
-                <p class="text-sm text-black/75 sm:text-lg">
+                <p class="text-sm text-black/75 sm:text-base">
                     Manage all data displayed on the portfolio home page from one backend source.
                 </p>
             </div>
         </template>
 
-        <div class="py-10">
-            <div class="mx-auto max-w-[1400px] space-y-4 px-4 sm:px-6 lg:px-8">
+        <div class="py-8">
+            <div class="mx-auto max-w-[1320px] space-y-4 px-4 sm:px-6 lg:px-8">
                 <div
                     v-if="page.props.flash.success"
                     class="rounded-2xl border border-emerald-700/35 bg-emerald-100/70 px-4 py-3 text-sm font-medium text-emerald-900"
@@ -113,14 +113,14 @@ const resetDefaults = () => {
                     </p>
                 </div>
 
-                <section class="skeuo-card p-6 sm:p-8">
-                    <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-black/35 bg-[#ffdb67] px-3 py-1.5 text-sm font-semibold uppercase tracking-[0.12em]">
+                <section class="skeuo-card p-5 sm:p-6">
+                    <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-black/35 bg-[#ffdb67] px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em]">
                         <AppIcon name="code" class="h-4 w-4" />
                         Content JSON Editor
                     </div>
                     <div class="flex flex-wrap items-center justify-between gap-3">
                         <div>
-                            <h3 class="text-2xl font-extrabold text-black">
+                            <h3 class="text-xl font-extrabold text-black sm:text-2xl">
                                 Home Page Payload
                             </h3>
                             <p class="text-sm text-black/75">
@@ -131,14 +131,14 @@ const resetDefaults = () => {
                         <div class="flex flex-wrap gap-2">
                             <button
                                 type="button"
-                                class="skeuo-button-soft px-4 py-2 text-sm font-semibold"
+                                class="skeuo-button-soft px-4 py-2 text-xs font-semibold sm:text-sm"
                                 @click="syncJsonToForm"
                             >
                                 Format JSON
                             </button>
                             <button
                                 type="button"
-                                class="skeuo-button-soft px-4 py-2 text-sm font-semibold"
+                                class="skeuo-button-soft px-4 py-2 text-xs font-semibold sm:text-sm"
                                 @click="resetDefaults"
                             >
                                 Reset to Defaults
@@ -151,7 +151,7 @@ const resetDefaults = () => {
                             v-model="contentJson"
                             rows="36"
                             spellcheck="false"
-                            class="w-full rounded-2xl border border-black/35 bg-[#ffdb67] p-4 font-mono text-sm text-black shadow-none focus:border-black focus:ring-0"
+                            class="w-full rounded-2xl border border-black/35 bg-[#ffdb67] p-3.5 font-mono text-xs text-black shadow-none focus:border-black focus:ring-0 sm:text-sm"
                         />
 
                         <div class="flex justify-end">

@@ -1,0 +1,142 @@
+Follow a STRICT Service Layer Architecture. This is non-negotiable.
+
+Implement ID encryption or obfuscation for all API payloads so raw database IDs are not exposed to the client. 
+The backend must securely decrypt and validate the IDs and verify ownership before performing any action.
+
+──────────────────────────────
+1️⃣ FORM REQUEST (Entry Point)
+──────────────────────────────
+
+Create a Store[FeatureName]Request class.
+
+Requirements:
+- All validation rules must be defined here.
+- Use authorize() properly.
+- On validation failure, return a 422 JSON response.
+- Do NOT place business logic here.
+- Sanitize and normalize input where necessary.
+
+Return only validated data using:
+$request->validated()
+
+──────────────────────────────
+2️⃣ CONTROLLER (Traffic Cop – MUST BE THIN)
+──────────────────────────────
+
+Create [FeatureName]Controller.
+
+Requirements:
+- Inject [FeatureName]Service via constructor.
+- The store() method must ONLY:
+    1. Receive validated data
+    2. Call ONE public service method (handle() or execute())
+    3. Return a standardized JSON response using API Resource
+- NO business logic.
+- NO if/else rules.
+- NO database queries.
+- NO transactions.
+- NO manual validation.
+
+The controller must be extremely thin.
+
+──────────────────────────────
+3️⃣ SERVICE LAYER (The Brain)
+──────────────────────────────
+
+Create App\Services\[FeatureName]Service.
+
+Requirements:
+- Wrap core logic inside:
+  DB::transaction(function () { ... });
+
+- Enforce business rules here only.
+- If a business rule fails:
+    Throw a custom exception.
+    DO NOT return strings.
+    DO NOT return false.
+
+- Keep public method small.
+- If logic exceeds 15 lines:
+    Break into private methods.
+
+- Ensure concurrency safety.
+- Avoid N+1 queries.
+- Use proper locking (lockForUpdate()) if necessary.
+- Keep methods single-responsibility.
+
+Return only domain models or DTOs — never mixed types.
+
+──────────────────────────────
+4️⃣ CUSTOM EXCEPTIONS
+──────────────────────────────
+
+Create custom exceptions in:
+App\Exceptions\
+
+Example:
+- InsufficientBalanceException
+- FeatureNotAvailableException
+
+Each exception must:
+- Return proper HTTP status code
+- Return JSON response format
+- Be API-friendly
+
+──────────────────────────────
+5️⃣ API RESOURCE (Mobile Optimized Output)
+──────────────────────────────
+
+Create [FeatureName]Resource.
+
+Requirements:
+- Remove unnecessary null fields.
+- Avoid deep nested relations.
+- Return lightweight JSON (optimized for WAP users).
+- No heavy metadata.
+- No unused attributes.
+
+Goal: Keep response under ~2–5kb JSON.
+
+──────────────────────────────
+6️⃣ PERFORMANCE RULES (IMPORTANT)
+──────────────────────────────
+
+- Use DB indexes assumption.
+- Use eager loading where necessary.
+- Do NOT load unused relationships.
+- Avoid unnecessary loops.
+- No heavy computations inside controller.
+- No returning entire models blindly.
+- Assume Redis caching may be added later.
+
+──────────────────────────────
+7️⃣ RESPONSE FORMAT
+──────────────────────────────
+
+Success Response Example:
+{
+  "success": true,
+  "message": "Feature executed successfully",
+  "data": { ... }
+}
+
+Error Response Example:
+{
+  "success": false,
+  "message": "Business rule violation message"
+}
+
+──────────────────────────────
+
+Now generate FULL PRODUCTION-READY CODE for:
+
+- Controller
+- Form Request
+- Service
+- Custom Exception(s)
+- API Resource
+
+Follow Laravel and Vuejs best practices strictly.
+No shortcuts.
+No comments explaining theory.
+Only clean production code.

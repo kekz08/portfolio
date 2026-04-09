@@ -30,5 +30,18 @@ class ProjectPolicy
     {
         return $user->isAdmin();
     }
-}
 
+    public function createProgressUpdate(User $user, Project $project): bool
+    {
+        return $user->isAdmin() && $project->canCollaborate();
+    }
+
+    public function createMessage(User $user, Project $project): bool
+    {
+        if (! $project->canCollaborate()) {
+            return false;
+        }
+
+        return $user->isAdmin() || $project->user_id === $user->id;
+    }
+}

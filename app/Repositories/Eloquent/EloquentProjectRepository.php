@@ -19,7 +19,11 @@ class EloquentProjectRepository implements ProjectRepositoryInterface
     {
         return $user
             ->projects()
-            ->with(['activityLogs' => fn ($query) => $query->with('actor:id,name')->latest('created_at')])
+            ->with([
+                'activityLogs' => fn ($query) => $query->with('actor:id,name')->latest('created_at'),
+                'updates' => fn ($query) => $query->with('creator:id,name')->latest('created_at'),
+                'messages' => fn ($query) => $query->with('sender:id,name,role')->latest('created_at'),
+            ])
             ->latest('created_at')
             ->get();
     }
@@ -30,6 +34,8 @@ class EloquentProjectRepository implements ProjectRepositoryInterface
             ->with([
                 'user:id,name,email',
                 'activityLogs' => fn ($query) => $query->with('actor:id,name')->latest('created_at'),
+                'updates' => fn ($query) => $query->with('creator:id,name')->latest('created_at'),
+                'messages' => fn ($query) => $query->with('sender:id,name,role')->latest('created_at'),
             ])
             ->latest('created_at')
             ->paginate($perPage)

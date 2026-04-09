@@ -52,7 +52,7 @@ const closeMobileMenu = () => {
     <div class="skeuo-page flex min-h-screen flex-col text-black">
         <nav class="skeuo-nav sticky top-0 z-50 border-b border-black/20">
             <div class="mx-auto max-w-[1900px] px-6 sm:px-10 lg:px-16">
-                <div class="flex min-h-[88px] items-center justify-between gap-4">
+                <div class="flex min-h-[80px] items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
                         <button
                             type="button"
@@ -79,7 +79,7 @@ const closeMobileMenu = () => {
                             <img
                                 src="/legacy/images/logo.png"
                                 alt="Portfolio"
-                                class="h-16 w-auto object-contain sm:h-20"
+                                class="h-12 w-auto object-contain sm:h-14"
                             >
                         </Link>
                     </div>
@@ -182,13 +182,13 @@ const closeMobileMenu = () => {
             </aside>
 
             <aside class="hidden w-72 shrink-0 border-r border-black/20 xl:block">
-                <div class="sticky top-[96px] px-6 py-8">
+                <div class="sticky top-[88px] px-6 py-7">
                     <nav class="space-y-3">
                         <Link
                             v-for="link in navigationLinks"
                             :key="`desktop-${link.key}`"
                             :href="link.href"
-                            class="block w-full px-4 py-3 text-left text-sm font-semibold uppercase tracking-[0.13em]"
+                            class="block w-full px-4 py-2.5 text-left text-sm font-semibold uppercase tracking-[0.13em]"
                             :class="link.active ? 'skeuo-button' : 'skeuo-button-soft'"
                         >
                             {{ link.label }}
@@ -207,7 +207,7 @@ const closeMobileMenu = () => {
                     v-if="$slots.header"
                     class="border-b border-black/20"
                 >
-                    <div class="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 lg:px-8">
+                    <div class="mx-auto max-w-[1320px] px-4 py-5 sm:px-6 lg:px-8">
                         <slot name="header" />
                     </div>
                 </header>

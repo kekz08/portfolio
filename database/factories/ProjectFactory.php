@@ -23,7 +23,10 @@ class ProjectFactory extends Factory
             'user_id' => User::factory(),
             'title' => 'Website Project Request',
             'description' => $this->faker->paragraph(),
-            'status' => ProjectStatus::PENDING_REVIEW,
+            'budget' => '$1,000 - $5,000',
+            'deadline' => now()->addWeeks(3)->toDateString(),
+            'status' => ProjectStatus::PENDING,
+            'progress_percentage' => 0,
             'status_notes' => 'Awaiting staff review.',
         ];
     }

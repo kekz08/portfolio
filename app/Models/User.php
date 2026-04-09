@@ -45,8 +45,23 @@ class User extends Authenticatable
         return $this->hasMany(Project::class, 'reviewed_by');
     }
 
+    public function projectUpdates(): HasMany
+    {
+        return $this->hasMany(ProjectUpdate::class, 'created_by');
+    }
+
+    public function projectMessages(): HasMany
+    {
+        return $this->hasMany(ProjectMessage::class, 'sender_id');
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === UserRole::ADMIN;
+    }
+
+    public function isClient(): bool
+    {
+        return in_array($this->role, [UserRole::CLIENT, UserRole::USER], true);
     }
 }

@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'company' => $this->faker->company(),
             'password' => static::$password ??= Hash::make('password'),
-            'role' => UserRole::USER,
+            'role' => UserRole::CLIENT,
             'remember_token' => Str::random(10),
         ];
     }

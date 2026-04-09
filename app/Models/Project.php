@@ -15,9 +15,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'user_id',
     'title',
     'description',
+    'budget',
+    'deadline',
     'status',
+    'progress_percentage',
     'reviewed_by',
     'approved_at',
+    'start_date',
     'started_at',
     'completed_at',
     'status_notes',
@@ -31,7 +35,10 @@ class Project extends Model
     {
         return [
             'status' => ProjectStatus::class,
+            'deadline' => 'date',
+            'progress_percentage' => 'integer',
             'approved_at' => 'datetime',
+            'start_date' => 'datetime',
             'started_at' => 'datetime',
             'completed_at' => 'datetime',
         ];
@@ -56,5 +63,19 @@ class Project extends Model
     {
         return $this->hasMany(ActivityLog::class);
     }
-}
 
+    public function updates(): HasMany
+    {
+        return $this->hasMany(ProjectUpdate::class)->latest('created_at');
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(ProjectMessage::class)->latest('created_at');
+    }
+
+    public function canCollaborate(): bool
+    {
+        return $this->status->allowsCollaboration();
+    }
+}
