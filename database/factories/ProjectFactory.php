@@ -22,10 +22,9 @@ class ProjectFactory extends Factory
         return [
             'user_id' => User::factory(),
             'title' => 'Website Project Request',
-            'description' => fake()->paragraph(),
+            'description' => $this->faker->paragraph(),
             'status' => ProjectStatus::PENDING_REVIEW,
             'status_notes' => 'Awaiting staff review.',
         ];
     }
 }
-
