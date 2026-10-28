@@ -503,6 +503,8 @@ onBeforeUnmount(() => {
                         :title="project.title"
                         :category="project.category"
                         :summary="project.summary"
+                        :badge="project.badge || ''"
+                        :tags="project.tags || []"
                     />
                 </div>
 
