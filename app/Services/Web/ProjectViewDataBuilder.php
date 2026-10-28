@@ -17,6 +17,7 @@ class ProjectViewDataBuilder
     {
         return [
             'id' => $this->ids->encode($project->id),
+            'reference_code' => sprintf('PRJ-%04d', $project->id),
             'title' => $project->title,
             'description' => $project->description,
             'budget' => $project->budget,

@@ -181,6 +181,20 @@ const normalizedProgress = (value) => {
     return Math.max(0, Math.min(100, parsed));
 };
 
+const formatProjectRef = (project) => {
+    if (project?.reference_code) {
+        return project.reference_code;
+    }
+    const raw = String(project?.id ?? '');
+    if (/^\d+$/.test(raw)) {
+        return `PRJ-${raw.padStart(4, '0')}`;
+    }
+    if (raw.startsWith('PRJ-')) {
+        return raw;
+    }
+    return 'PRJ-REQUEST';
+};
+
 const applyProjectUpdate = (payload) => {
     const project = liveProjects.value.find((item) => item.id === payload.project_id);
 
@@ -427,7 +441,7 @@ onBeforeUnmount(() => {
                                     <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-black/30 bg-[#ffdb67]">
                                         <AppIcon name="briefcase" class="h-4 w-4" />
                                     </span>
-                                    Project #{{ project.id }}
+                                    Project #{{ formatProjectRef(project) }}
                                 </p>
                                 <h3 class="mt-2 text-[clamp(1.45rem,2.3vw,2rem)] font-extrabold leading-tight text-black">
                                     {{ project.title }}
