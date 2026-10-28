@@ -50,7 +50,7 @@ return [
         'intro_label' => 'Professional Summary',
         'title' => 'Profile Overview',
         'headline' => "I'm Vingie O. Nimez, a BSIT Graduate — System Administrator, DevOps & IT Support Specialist",
-        'description' => 'Information Technology graduate from Surigao del Norte State University and former System Administrator / Network Admin / IT Support at Surigao Metropolitan Water District (SMWD). Serves as the primary DevOps engineer and infrastructure specialist across systems engineered with professor Engr. Ghandi Galila, alongside strong competencies in server administration, network security, and full-stack web/mobile application development (Laravel, Vue.js, Inertia.js, React Native). Backed by over a decade of hands-on technical and operational leadership.',
+        'description' => 'Information Technology graduate from Surigao del Norte State University and former System Administrator / Network Admin / IT Support at Surigao Metropolitan Water District (SMWD). Serves as the DevOps engineer, QA tester, and collaborator for software systems developed by professor Engr. Ghandi Galila, alongside strong expertise in server administration, network security, and full-stack web/mobile application support. Backed by over a decade of hands-on technical and operational leadership.',
         'email' => 'vingienimez@gmail.com',
         'date_of_birth' => '-',
         'location' => 'San Francisco, Anao-aon, Surigao del Norte',
@@ -130,9 +130,9 @@ return [
             ],
             [
                 'period' => '2025 - Present',
-                'title' => 'DevOps Specialist & Web Systems Collaborator',
+                'title' => 'DevOps Specialist, QA Tester & Collaborator',
                 'company' => 'Galila Tech Collaborations / Academic Systems',
-                'desc' => 'Served as the DevOps engineer and infrastructure manager across systems developed with professor Engr. Ghandi Galila. Handled end-to-end Linux VPS and LAMP deployments, cPanel hosting, database migrations, and operational maintenance, including co-developing the Surigao Metropolitan Water District (SMWD) Web Portal (analytics, queue tracking, and offline licensing systems).',
+                'desc' => 'Collaborated with my professor, Engr. Ghandi Galila, across his software systems as DevOps engineer and QA tester. Handled Linux VPS deployments, LAMP/cPanel infrastructure, environment configurations, and extensive system testing for platforms including the SMWD Web Portal, while serving as the district System Administrator.',
             ],
             [
                 'period' => '2018 - 2021',
@@ -174,9 +174,9 @@ return [
                 'image' => '/legacy/projects/smwd/smwd_portal.png',
                 'title' => 'SMWD Enterprise Portal & Intelligence',
                 'category' => 'Laravel + Vue 3 + Inertia',
-                'badge' => 'DevOps & Collab: Engr. Ghandi Galila',
-                'tags' => ['DevOps', 'Engr. Ghandi Galila', 'Laravel 12', 'Vue 3', 'Inertia.js', 'Linux VPS', 'Offline License'],
-                'summary' => 'Comprehensive utility management portal developed in collaboration with my professor, Engr. Ghandi Galila, where I served as the DevOps engineer managing server deployment, database configurations, and environment infrastructure alongside co-building the billing analytics, queue intelligence, and offline licensing systems.',
+                'badge' => 'Lead: Engr. Ghandi Galila | DevOps & QA',
+                'tags' => ['Lead: Engr. Ghandi Galila', 'DevOps & SysAdmin', 'System Testing / QA', 'Laravel 12', 'Vue 3', 'Inertia.js', 'Linux VPS'],
+                'summary' => 'Enterprise utility management portal developed by my professor, Engr. Ghandi Galila. I collaborated as the DevOps engineer, system tester (QA), and the district System Administrator—managing Linux VPS deployment, database setup, environment configuration, system testing, and ongoing operational maintenance.',
             ],
             [
                 'image' => '/legacy/projects/uzzap/uzzap_mobile.png',
@@ -282,10 +282,10 @@ return [
         'cards' => [
             [
                 'image' => '/legacy/projects/smwd/smwd_portal.png',
-                'title' => 'Engineering the SMWD Enterprise Management & Analytics Portal',
+                'title' => 'SMWD Enterprise Portal: DevOps, QA & Administration',
                 'date' => 'Case Note',
-                'time' => 'Collab w/ Engr. Ghandi Galila',
-                'summary' => 'Developed in collaboration with my professor, Engr. Ghandi Galila, for Surigao Metropolitan Water District, architecting billing vs. collection analytics, cashier queue monitoring, Spatie role-based access, and offline hardware-bound licensing.',
+                'time' => 'Lead: Engr. Ghandi Galila | DevOps & QA',
+                'summary' => 'Enterprise utility platform developed by Engr. Ghandi Galila. Highlights my responsibilities in DevOps server deployments, comprehensive system testing/QA, and day-to-day System Administration at Surigao Metropolitan Water District.',
             ],
             [
                 'image' => '/legacy/projects/uzzap/uzzap_mobile.png',
